@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}StayEase Hotel{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+    <a class="brand" href="{{ url_for('home') }}"><span class="brand-mark">S</span> StayEase</a>
+    <div class="nav-links"><a href="{{ url_for('home') }}">Home</a><a href="{{ url_for('bookings') }}">Manage Bookings</a></div>
+  </nav>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}<div class="messages">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+  <footer>© 2026 StayEase Hotel · A demo booking project built with Flask</footer>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}StayEase | Find your stay{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">YOUR NEXT GETAWAY STARTS HERE</span>
+    <h1>A little escape.<br><em>A lot of comfort.</em></h1>
+    <p>Thoughtfully designed rooms, warm hospitality, and a stay worth remembering.</p>
+    <a class="btn primary" href="#rooms">Explore rooms <span>↓</span></a>
+  </div>
+  <div class="hero-art" aria-label="Hotel room illustration"><div class="sun"></div><div class="plant">🌿</div><div class="window"><div></div><div></div></div><div class="bed"><div class="headboard"></div><div class="pillow"></div><div class="blanket"></div><div class="bed-leg left"></div><div class="bed-leg right"></div></div><div class="art-caption">YOUR COMFORT, OUR PRIORITY</div></div>
+</section>
+<section class="intro" id="rooms">
+  <div><span class="eyebrow">STAY A LITTLE LONGER</span><h2>Rooms made for you</h2></div>
+  <p>Choose your room, select your dates, and book your stay in just a few steps.</p>
+</section>
+<section class="room-grid">
+  {% for room in rooms %}
+  <article class="room-card">
+    <div class="room-art room-art-{{ room.id }}"><span class="room-emoji">{{ room.emoji }}</span><span class="room-tag">{{ room.capacity }} guests max</span></div>
+    <div class="room-body">
+      <div class="room-title"><h3>{{ room.name }}</h3><span class="rating">★ 4.8</span></div>
+      <p>{{ room.description }}</p>
+      <div class="room-bottom"><div><strong>₹{{ "{:,}".format(room.price) }}</strong><small> / night</small></div><a class="btn small-btn" href="{{ url_for('book_room', room_id=room.id) }}">Book room ↗</a></div>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+<section class="perks">
+  <div><span>✦</span><h3>Easy booking</h3><p>Reserve your room in a few simple steps.</p></div>
+  <div><span>⌂</span><h3>Comfort first</h3><p>Room options for solo travellers and families.</p></div>
+  <div><span>♡</span><h3>Peace of mind</h3><p>View and manage your demo bookings anytime.</p></div>
+</section>
+{% endblock %}

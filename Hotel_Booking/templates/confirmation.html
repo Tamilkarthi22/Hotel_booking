@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Booking confirmed | StayEase{% endblock %}
+{% block content %}
+<main class="confirmation-page">
+  <div class="success-icon">✓</div><span class="eyebrow">ALL SET</span><h1>Your stay is booked!</h1>
+  <p class="muted">Thanks, {{ booking.guest_name }}. Your demo reservation has been saved.</p>
+  <div class="confirm-card">
+    <div class="confirm-top"><div><small>BOOKING REFERENCE</small><h2>SE-{{ "%05d"|format(booking.id) }}</h2></div><span class="status">Confirmed</span></div>
+    <hr>
+    <h3>{{ booking.room.name }}</h3><p>{{ booking.guest_name }} · {{ booking.email }}</p>
+    <div class="date-grid"><div><small>CHECK-IN</small><strong>{{ booking.check_in }}</strong></div><div><small>CHECK-OUT</small><strong>{{ booking.check_out }}</strong></div><div><small>GUESTS</small><strong>{{ booking.guests }}</strong></div></div>
+  </div>
+  <a class="btn primary" href="{{ url_for('home') }}">Back to home</a> <a class="btn secondary" href="{{ url_for('bookings') }}">Manage bookings</a>
+</main>
+{% endblock %}

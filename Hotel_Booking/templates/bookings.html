@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Manage bookings | StayEase{% endblock %}
+{% block content %}
+<main class="manage-page">
+  <span class="eyebrow">ADMIN VIEW · DEMO</span><h1>Manage bookings</h1><p class="muted">Review reservations created in this demo app.</p>
+  <section class="manage-card">
+  {% if bookings %}
+    <div class="table-wrap"><table><thead><tr><th>REFERENCE</th><th>GUEST</th><th>ROOM</th><th>DATES</th><th>GUESTS</th><th></th></tr></thead><tbody>
+    {% for booking in bookings %}<tr><td><strong>SE-{{ "%05d"|format(booking.id) }}</strong></td><td>{{ booking.guest_name }}<small class="cell-sub">{{ booking.email }}</small></td><td>{{ booking.room.name }}</td><td>{{ booking.check_in }}<small class="cell-sub">to {{ booking.check_out }}</small></td><td>{{ booking.guests }}</td><td><form method="post" action="{{ url_for('cancel_booking', booking_id=booking.id) }}" onsubmit="return confirm('Cancel this booking?')"><button class="text-danger">Cancel</button></form></td></tr>{% endfor %}
+    </tbody></table></div>
+  {% else %}<div class="empty"><div class="empty-icon">⌂</div><h3>No bookings yet</h3><p>Your reservations will appear here.</p><a class="btn primary" href="{{ url_for('home') }}">Explore rooms</a></div>{% endif %}
+  </section>
+</main>
+{% endblock %}
